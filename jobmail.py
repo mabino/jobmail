@@ -1,7 +1,7 @@
 import psutil
 import win32api
 import win32con
-import win32gui_struct
+import win32gui
 import win32process
 import smtplib
 from email.mime.text import MIMEText
@@ -72,10 +72,10 @@ def add_to_system_tray(icon_path, hover_text):
         win32con.LR_DEFAULTSIZE | win32con.LR_LOADFROMFILE
     )
     flags = win32gui.NIF_ICON | win32gui.NIF_MESSAGE
-flags |= win32gui.NIF_TIP
-nid = (hwnd, 0, flags, win32con.WM_USER+20, hicon, hover_text)
-win32gui.Shell_NotifyIcon(win32gui.NIM_ADD, nid)
-win32gui.PumpMessages()
+    flags |= win32gui.NIF_TIP
+    nid = (hwnd, 0, flags, win32con.WM_USER+20, hicon, hover_text)
+    win32gui.Shell_NotifyIcon(win32gui.NIM_ADD, nid)
+    win32gui.PumpMessages()
 
 if __name__ == "__main__":
     processes = get_processes()
